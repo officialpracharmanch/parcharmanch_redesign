@@ -1,18 +1,18 @@
 // app/blogs/[category]/page.jsx
-
+// "use client"
 import BlogCategories from "./BlogCategories"
 
 const LIMIT = 10 // API ko bhejne wala limit
 
-export const metadata = {
-  title: "Category Blogs | MyBlog",
-  description:
-    "Read latest blogs filtered by categories like AI, Programming, Technology and more.",
-}
+// export const metadata = {
+//   title: "Category Blogs | MyBlog",
+//   description:
+//     "Read latest blogs filtered by categories like AI, Programming, Technology and more.",
+// }
 
 async function getBlogsByCategory(category, page) {
   const res = await fetch(
-    `http://127.0.0.1:5050/parcharmanch/getBlogsByCategory/${category}?page=${page}&limit=${LIMIT}`,
+    `https://parcharmanch-backend-7kc7.onrender.com/parcharmanch/getBlogsByCategory/${category}?page=${page}&limit=${LIMIT}`,
     {
       next: { revalidate: 300 }, // ✅ 5 min cache (ISR)
     }
