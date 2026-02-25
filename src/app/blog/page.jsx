@@ -2,17 +2,13 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
-import { Badge } from "@/components/ui/badge"
 import { blogPosts } from "@/data/categories"
 import { Clock, ArrowRight } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 
 export default function BlogArchivePage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
-
       <main className="mx-auto max-w-7xl px-4 py-8 lg:px-6 lg:py-12">
         {/* Header */}
         <div className="mb-12 space-y-4 text-center">
@@ -71,8 +67,6 @@ export default function BlogArchivePage() {
           ))}
         </div>
       </main>
-
-      <Footer />
     </div>
   )
 }

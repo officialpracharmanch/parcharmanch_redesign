@@ -1,6 +1,4 @@
 "use client"
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
 import { BlogSectionA } from "@/components/sections/home/BlogSectionA";
 import { BlogSectionB } from "@/components/sections/home/BlogSectionB";
 import { BlogSectionC } from "@/components/sections/home/BlogSectionC";
@@ -11,7 +9,6 @@ import { HeroSection } from "@/components/sections/home/Hero";
 import { NewsletterCta } from "@/components/sections/home/NewsletterCta";
 import { StatsBar } from "@/components/sections/home/StatsBar";
 import { TopAuthors } from "@/components/sections/home/TopAuthors";
-import Image from "next/image";
 import { useBlogs } from "@/contexts/BlogContext";
 export default function Home() {
   const featuredPost = {
