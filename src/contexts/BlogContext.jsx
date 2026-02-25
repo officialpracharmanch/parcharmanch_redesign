@@ -63,7 +63,7 @@ export const BlogProvider = ({ children }) => {
         catSetError(null);
          console.log("api call",category)
         const res = await axios.get(
-          `http://localhost:5050/parcharmanch/getBlogsByCategory/${category}?page=${page}&limit=35`
+          `https://parcharmanch-backend-7kc7.onrender.com/parcharmanch/getBlogsByCategory/${category}?page=${page}&limit=35`
         );
 
         catSetBlogs(res.data.data);
