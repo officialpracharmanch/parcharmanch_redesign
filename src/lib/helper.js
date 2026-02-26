@@ -14,7 +14,7 @@ export function decodeSlug(slug) {
 
   let decoded = slug;
 
-  // 🔥 decode until %26 khatam na ho jaye
+  // 🔥 decode until %26 khatam na ho ja
   while (decoded.includes("%")) {
     try {
       decoded = decodeURIComponent(decoded);
