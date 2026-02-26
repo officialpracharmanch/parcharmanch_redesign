@@ -33,18 +33,18 @@ const benefits = [
 
 export function Footer() {
   return (
-    <footer className="bg-blue-600 py-12 lg:py-16">
+    <footer className="bg-blue-accent py-1">
       <div className="mx-auto max-w-7xl px-4 lg:px-6">
         {/* Main Footer Card */}
-        <div className=" bg-white p-8 lg:p-12 shadow-xl">
+        <div className=" p-8 lg:p-12">
           <div className="grid gap-8 lg:grid-cols-6 ">
             {/* Left - Brand */}
             <div className="lg:col-span-2 ">
               <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600">
+                {/* <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600">
                   <Newspaper className="h-7 w-7 text-white" />
-                </div>
-                <span className="text-2xl font-bold text-blue-600">ParcharManch</span>
+                </div> */}
+                <span className="text-2xl font-bold text-primary">ParcharManch</span>
               </div>
               <p className="mb-5 text-base leading-relaxed text-slate-600">
                 We're here for you. Because building something that lasts requires more than just speed, focus on moving forward with clear sense of purpose.
@@ -65,15 +65,15 @@ export function Footer() {
               </div>
 
               {/* Email */}
-              <div className="flex items-center gap-2 text-blue-600">
+              <div className="flex items-center gap-2 text-primary">
                 <Mail className="h-6 w-6" />
-                <span className="font-medium text-base">official.parchar.manch@gmail.com</span>
+                <span className="font-medium text-base hover:text-blue-600 ">official.parchar.manch@gmail.com</span>
               </div>
             </div>
 
             {/* Middle Left - Quick Links */}
             <div className="">
-              <h3 className="mb-4 text-base font-bold text-blue-600 uppercase tracking-wide">
+              <h3 className="mb-4 text-base font-bold text-primary uppercase tracking-wide">
                 Quick Links
               </h3>
               <ul className="flex flex-col gap-2.5">
@@ -92,7 +92,7 @@ export function Footer() {
 
             {/* Middle Right - Our Niches */}
             <div className="">
-              <h3 className="mb-4 text-base font-bold text-blue-600 uppercase tracking-wide">
+              <h3 className="mb-4 text-base font-bold text-primary uppercase tracking-wide">
                 Our Niches
               </h3>
               <ul className="flex flex-col gap-2.5">
@@ -114,10 +114,10 @@ export function Footer() {
             </div>
 
             {/* Right - Write With Us CTA */}
-            <div className=" lg:col-span-2 rounded-xl bg-blue-50 p-2 border border-blue-300">
+            <div className=" lg:col-span-2 ">
               <div className="flex items-center gap-2 mb-4">
-                <PenTool className="h-6 w-6 text-blue-600" />
-                <h3 className="text-base font-bold text-blue-600">Write With Us</h3>
+                <PenTool className="h-6 w-6 text-primary" />
+                <h3 className="text-base font-bold text-primary">Write With Us</h3>
               </div>
               <p className="mb-4 text-base leading-relaxed text-slate-700">
                 Share your ideas, stories, and expertise with our growing audience.
@@ -147,7 +147,7 @@ export function Footer() {
 
         {/* Bottom Copyright */}
         <div className="mt-8 text-center">
-          <p className="text-base text-blue-50">
+          <p className="text-base text-blue-600">
             Copyright © 2026 ParcharManch | All Rights Reserved.
           </p>
         </div>

@@ -12,47 +12,47 @@ export function LatestBlogsSidebar({ blogs }) {
   return (
     <div className="sticky top-24 space-y-6">
       {/* Latest Posts Card */}
-      <Card className="overflow-hidden">
-        <div className="bg-gradient-to-r from-primary to-primary/80 p-4">
-          <h2 className="font-playfair text-lg font-bold text-primary-foreground">
+      <Card className="overflow-hidden border-0 shadow-none">
+        <div className="border border-gray-50 p-4">
+          <h2 className="font-playfair text-lg font-bold text-primary">
             Latest Articles
           </h2>
-          <p className="text-xs text-primary-foreground/70 mt-1">
+          <p className="text-xs text-primary-background mt-1">
             Stay updated with new stories
           </p>
         </div>
 
-        <div className="divide-y">
+        <div className="divide-y flex flex-col gap-1">
           {blogs.map((blog, index) => (
             <Link
-              key={blog.id}
-              href={`/blog/${blog.id}`}
-              className="block p-3 hover:bg-accent/50 transition-colors"
+              key={index}
+              href={`/blog/${blog?.Slug}`}
+              className="block  rounded-2xl transition-all hover:-translate-y-[1px] hover:border hover:border-accent/80 overflow-hidden"
             >
               <div className="flex gap-3">
                 {/* Thumbnail */}
-                <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded">
+                <div className="relative h-21 w-16 flex-shrink-0 overflow-hidden rounded">
                   <Image
-                    src={blog.image}
-                    alt={blog.title}
+                    src={blog.HeroImg.url}
+                  alt={blog?.HeroAltText || "Digital Marketing Company In India"}
                     fill
                     className="object-cover"
                   />
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold line-clamp-2 text-foreground hover:text-primary transition-colors">
-                    {blog.title}
-                  </p>
+                <div className="flex-1 min-w-0 p-2">
                   <div className="flex items-center gap-1.5 mt-1">
                     <Badge variant="outline" className="text-xs">
-                      {blog.category}
+                      {blog.Category}
                     </Badge>
-                    <span className="text-xs text-muted-foreground">
+                    {/* <span className="text-xs text-muted-foreground">
                       {blog.readTime}
-                    </span>
+                    </span> */}
                   </div>
+                  <p className="text-sm font-semibold line-clamp-2 text-foreground hover:text-primary transition-colors">
+                    {blog.Title}
+                  </p>
                 </div>
               </div>
             </Link>
@@ -61,8 +61,8 @@ export function LatestBlogsSidebar({ blogs }) {
 
         <Separator />
         <Link
-          href="/blog"
-          className="block p-3 text-center text-sm font-semibold text-primary hover:bg-accent/50 transition-colors flex items-center justify-center gap-2 group"
+          href={`/${blogs[0]?.Category?.toLowerCase().replace(/\s+/g, "-")}`}
+          className="block p-3 text-center text-sm font-semibold text-primary hover:bg-accent/10 transition-colors flex items-center justify-center gap-2 group"
         >
           View All Articles
           <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -70,7 +70,7 @@ export function LatestBlogsSidebar({ blogs }) {
       </Card>
 
       {/* Newsletter Signup Card */}
-      <Card className="overflow-hidden">
+      {/* <Card className="overflow-hidden">
         <div className="bg-gradient-to-r from-accent to-accent/80 p-4 text-accent-foreground">
           <h3 className="font-semibold text-sm">Never miss an update</h3>
           <p className="text-xs opacity-90 mt-1">
@@ -91,10 +91,10 @@ export function LatestBlogsSidebar({ blogs }) {
             No spam, unsubscribe anytime
           </p>
         </div>
-      </Card>
+      </Card> */}
 
       {/* About Section */}
-      <Card className="p-4 space-y-3">
+      {/* <Card className="p-4 space-y-3">
         <h3 className="font-semibold text-sm">About ParcharManch</h3>
         <p className="text-xs text-muted-foreground leading-relaxed">
           ParcharManch is a platform for curious minds to explore ideas, stories, and insights across technology, business, lifestyle, and education.
@@ -112,7 +112,7 @@ export function LatestBlogsSidebar({ blogs }) {
             Privacy
           </Link>
         </div>
-      </Card>
+      </Card> */}
     </div>
   )
 }

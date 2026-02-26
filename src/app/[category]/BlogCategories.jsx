@@ -1,16 +1,41 @@
 // app/blogs/[category]/BlogCategories.jsx
+"use client"
 
-import { CategoryHero } from "@/components/category/CategoryHero"
+import { useBlogs } from "@/contexts/BlogContext"
 import { CategoryBlogGrid } from "@/components/category/CategoryBlogGrid"
 import { CategorySidebar } from "@/components/category/CategorySidebar"
 
-export default function BlogCategories({
-  blogs = [],
-  category,
-  currentPage,
-  totalPages,
-}) {
-  if (!blogs.length) {
+export default function BlogCategories() {
+  const {
+    catBlogs,
+    catLoading,
+    catError,
+    category,
+    catPage,
+    catTotalPages,
+  } = useBlogs()
+
+  /* ---------------- Loading ---------------- */
+  if (catLoading) {
+    return (
+      <div className="min-h-screen bg-background py-12 text-center">
+        <p className="text-muted-foreground">Loading blogs...</p>
+      </div>
+    )
+  }
+
+  /* ---------------- Error ---------------- */
+  if (catError) {
+    return (
+      <div className="min-h-screen bg-background py-12 text-center">
+        <h1 className="text-2xl font-bold">Something went wrong</h1>
+        <p className="mt-2 text-muted-foreground">{catError}</p>
+      </div>
+    )
+  }
+
+  /* ---------------- Empty ---------------- */
+  if (!catBlogs.length) {
     return (
       <div className="min-h-screen bg-background py-12 text-center">
         <h1 className="text-2xl font-bold">No blogs found</h1>
@@ -23,29 +48,22 @@ export default function BlogCategories({
 
   return (
     <main className="min-h-screen bg-background">
-      {/* Category Hero Section */}
-      {/* <CategoryHero
-        name={category}
-        description={`Latest blogs related to ${category}`}
-      /> */}
-
-      {/* Main Content */}
       <section className="bg-background py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
           <div className="grid gap-8 lg:grid-cols-3">
-            {/* Left: Blog Grid */}
+            {/* LEFT: BLOG GRID */}
             <div className="lg:col-span-2">
               <CategoryBlogGrid
-                blogs={blogs}
-                currentPage={currentPage}
-                totalPages={totalPages}
+                blogs={catBlogs}
                 category={category}
+                currentPage={catPage}
+                totalPages={catTotalPages}
               />
             </div>
 
-            {/* Right: Sidebar */}
+            {/* RIGHT: SIDEBAR */}
             <div className="lg:sticky lg:top-4 lg:h-fit">
-              <CategorySidebar latestPosts={blogs.slice(0, 5)} />
+              <CategorySidebar latestPosts={catBlogs.slice(0, 5)} />
             </div>
           </div>
         </div>
@@ -53,70 +71,3 @@ export default function BlogCategories({
     </main>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// import Link from "next/link"
-// import { categories, blogPosts } from "@/data/categories"
-// import { CategoryHero } from "@/components/category/CategoryHero"
-// import { CategoryBlogGrid } from "@/components/category/CategoryBlogGrid"
-// import { CategorySidebar } from "@/components/category/CategorySidebar"
-
-
-// export default async function 
-// BlogCategories({blogs}) {
-//   const category = categories["business"]
-
-//   if (!category) {
-//     return (
-//       <div className="min-h-screen bg-background py-12">
-//         <div className="mx-auto max-w-7xl px-4 text-center">
-//           <h1 className="text-3xl font-bold text-foreground">Category not found</h1>
-//           <p className="mt-2 text-muted-foreground">
-//             The category you are looking for does not exist.
-//           </p>
-//         </div>
-//       </div>
-//     )
-//   }
-
-//   return (
-//     <main className="min-h-screen bg-background">
-//       {/* Hero Section */}
-//       <CategoryHero
-//         name={category.name}
-//         description={category.description}
-//         image={category.image}
-//         subcategories={category.subcategories}
-//       />
-
-//       {/* Main Content */}
-//       <section className="bg-background py-12 lg:py-16">
-//         <div className="mx-auto max-w-7xl px-4 lg:px-6">
-//           <div className="grid gap-8 lg:grid-cols-3">
-//             {/* Left: Blog Grid */}
-//             <div className="lg:col-span-2">
-//               <CategoryBlogGrid blogs={blogs} />
-//             </div>
-
-//             {/* Right: Sidebar - Sticky */}
-//             <div className="lg:sticky lg:top-4 lg:h-fit">
-//               <CategorySidebar latestPosts={blogs?.slice(0,5)} />
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-
-
-//     </main>
-//   )
-// }

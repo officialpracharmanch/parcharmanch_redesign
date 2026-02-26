@@ -325,7 +325,7 @@ const topAuthorsData = [
     posts={lifestylePosts}
     /> 
 
-   <NewsletterCta/>
+   {/* <NewsletterCta/> */}
     <BlogSectionD  
      title="Education"
     subtitle="Online learning, career growth, tutorials, and resources"

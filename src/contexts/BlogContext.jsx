@@ -54,8 +54,9 @@ export const BlogProvider = ({ children }) => {
   const [catError, catSetError] = useState(null);
 
   // inputs as state
-  const [category, setCategory] = useState(null);
-  const [catPage, catSetPage] = useState(1);
+  const [category, setCategory] = useState("Digital Marketing");
+  const [catPage, setCatPage] = useState(1);
+  const [catTotalPages, setCatTotalPages] = useState(1);
 
     const fetchCatBlogs = async () => {
       try {
@@ -63,10 +64,13 @@ export const BlogProvider = ({ children }) => {
         catSetError(null);
          console.log("api call",category)
         const res = await axios.get(
-          `https://parcharmanch-backend-7kc7.onrender.com/parcharmanch/getBlogsByCategory/${category}?page=${page}&limit=35`
+          `https://parcharmanch-backend-7kc7.onrender.com/parcharmanch/getBlogsByCategory/${category}?page=${catPage}&limit=10`
         );
 
         catSetBlogs(res.data.data);
+        console.log("data =>",res?.data);
+        setCatTotalPages(res?.data?.pagination?.totalPages || 1);
+        
       } catch (err) {
         catSetError(
           err.response?.data?.message || "Failed to fetch blogs"
@@ -84,7 +88,7 @@ export const BlogProvider = ({ children }) => {
 // ******************************************************************
   return (
     <BlogContext.Provider
-      value={{blogs,loading,error,page,setPage,totalPages,fetchBlogs,getBlogsByCategory,catBlogs,catLoading,catError,catPage,catSetPage,setCategory
+      value={{blogs,loading,error,page,setPage,totalPages,fetchBlogs,getBlogsByCategory,catBlogs,catLoading,catError,catPage,setCatPage,setCategory,setCatTotalPages,catTotalPages
       }}
     >
       {children}

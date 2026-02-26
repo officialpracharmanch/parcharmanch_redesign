@@ -2,6 +2,7 @@ import Image from "next/image"
 import { Clock, ArrowRight } from "lucide-react"
 import { useBlogs } from "@/contexts/BlogContext";
 import { getCategoryColor } from "@/lib/getCategoryColor";
+import Link from "next/link"
 
 /* ───────────── Category color map (JSX) ───────────── */
 // const categoryColors = {
@@ -35,23 +36,23 @@ export function BlogSectionA({ title, subtitle, posts }) {
     const {getBlogsByCategory}=useBlogs();
     const blogs = getBlogsByCategory("Digital Marketing");
   const main = blogs?.[0]
-  const rest = blogs?.slice(1,5) || []
+  const rest = blogs?.slice(1,4) || []
 
   return (
-     <section className="border-b border-border bg-card">
-      <div className="mx-auto max-w-7xl px-4 py-10 lg:px-6 lg:py-14">
+     <section className=" bg-white">
+      <div className="mx-auto max-w-7xl px-4 py-10 lg:px-6 lg:py-8">
         <SectionHeader title="HEALTH" subtitle={subtitle} />
 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* LEFT -- large featured card */}
           {main && (
-            <article className="group flex h-full cursor-pointer flex-col overflow-hidden border border-border bg-background transition-all hover:border-accent/30 hover:shadow-xl hover:-translate-y-2">
-              <div className="relative aspect-video overflow-hidden">
+            <Link href={`/blog/${main?.Slug}`} className="group flex h-full cursor-pointer flex-col overflow-hidden border border-border rounded-2xl transition-all hover:border-accent/80 hover:-translate-y-[1px]">
+              <div className="relative min-h-60 overflow-hidden">
                 <Image
                 src={main?.HeroImg?.url || main.image}
                   alt={main?.HeroAltText}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105 "
                 />
                 <span
                   className={`absolute left-0 top-4 rounded-r px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${getCategoryColor(main.Category)}`}
@@ -60,7 +61,7 @@ export function BlogSectionA({ title, subtitle, posts }) {
                 </span>
               </div>
               <div className="flex flex-1 flex-col p-5">
-                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                {/* <div className="flex items-center justify-between text-xs text-muted-foreground">
                   <span>Feb 16, 2026</span>
                   {1===1 && (
                     <span className="flex items-center gap-1">
@@ -68,7 +69,7 @@ export function BlogSectionA({ title, subtitle, posts }) {
                       4 min read
                     </span>
                   )}
-                </div>
+                </div> */}
                 <h3 className="mb-2 font-serif text-xl font-bold leading-tight text-foreground transition-colors group-hover:text-accent text-balance">
                   {main.Title}
                 </h3>
@@ -80,34 +81,37 @@ export function BlogSectionA({ title, subtitle, posts }) {
                   <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
                 </span>
               </div>
-            </article>
+            </Link>
           )}
 
           {/* RIGHT -- stacked horizontal cards */}
-          <div className="flex flex-col divide-y divide-border border border-border bg-background">
+          <div className="flex flex-col rounded-2xl gap-2">
             {rest.map((post,index) => (
-              <article
+              <Link href={`/blog/${post?.Slug}`}
                 key={index}
-                className="group flex cursor-pointer gap-4 p-4 transition-all hover:bg-secondary hover:shadow-xl hover:-translate-y-1"
+                className="group flex cursor-pointer border gap-4 rounded-2xl transition-all hover:-translate-y-[1px] hover:border hover:border-accent/80 overflow-hidden"
               >
-                <div className="relative h-20 w-28 flex-shrink-0 overflow-hidden lg:h-24 lg:w-32">
+                <div className="relative h-20 w-28 flex-shrink-0 overflow-hidden lg:h-[8rem] lg:w-32">
                   <Image
                   src={post?.HeroImg?.url || main.image}
                   alt={post?.HeroAltText}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-tl-2xl rounded-bl-2xl"
                   />
                 </div>
-                <div className="flex flex-1 flex-col justify-center">
+                <div className="flex flex-1 flex-col justify-center p-4">
                   <span
                     className={`mb-1.5 inline-block w-fit rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${getCategoryColor(main.Category)}`}
                   >
                     {post.Category}
                   </span>
-                  <h3 className="text-sm font-bold leading-snug text-foreground transition-colors group-hover:text-accent line-clamp-2">
+                  <h3 className="text-sm font-bold leading-snug text-foreground transition-colors group-hover:text-accent line-clamp-1">
                     {post.Title}
                   </h3>
-                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-1 max-h-6">
+                  {main.MetaDescription}
+                </p>
+                  {/* <div className="flex items-center justify-between text-xs text-muted-foreground">
                   <span>Feb 16, 2026</span>
                   {1===1 && (
                     <span className="flex items-center gap-1">
@@ -115,9 +119,9 @@ export function BlogSectionA({ title, subtitle, posts }) {
                       4 min read
                     </span>
                   )}
+                </div> */}
                 </div>
-                </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
@@ -132,9 +136,10 @@ function SectionHeader({ title, subtitle }) {
     <div className="mb-8 flex items-end justify-between">
       <div>
         <div className="mb-1.5 flex items-center gap-2">
-          <div className="h-5 w-1 bg-accent" />
+          {/* <div className="h-5 w-1 bg-accent" /> */}
           <h2 className="font-serif text-2xl font-bold md:text-3xl">
             {title}
+          <hr  className="h-1 bg-accent"/>
           </h2>
         </div>
         <p className="text-sm text-muted-foreground">{subtitle}</p>

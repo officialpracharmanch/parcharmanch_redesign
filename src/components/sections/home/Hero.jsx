@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Clock, User, Building2, Sparkles, Heart, Gavel, Zap, BookOpen } from "lucide-react"
+import Link from "next/link"
 
 
 
@@ -92,7 +93,7 @@ export function HeroSection({ featured, trending }) {
             ].map((category) => {
               const Icon = category.icon
               return (
-                <div
+                <Link href={`/${category?.name?.toLowerCase().replace(/\s+/g, "-")}`}
                   key={category.name}
                   className={`${category.bgColor} rounded-lg p-4 cursor-pointer transition-all hover:shadow-md hover:scale-105 group`}
                 >
@@ -105,7 +106,7 @@ export function HeroSection({ featured, trending }) {
                   <p className="mt-1 text-[10px] leading-snug text-muted-foreground line-clamp-2">
                     {category.description}
                   </p>
-                </div>
+                </Link>
               )
             })}
           </div>

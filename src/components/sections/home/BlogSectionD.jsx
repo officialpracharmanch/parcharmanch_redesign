@@ -2,6 +2,7 @@ import Image from "next/image"
 import { Clock, ArrowRight } from "lucide-react"
 import { useBlogs } from "@/contexts/BlogContext";
 import { getCategoryColor } from "@/lib/getCategoryColor";
+import Link from "next/link"
 
 /* ───────────── Category color map ───────────── */
 // const categoryColors = {
@@ -38,16 +39,16 @@ export function BlogSectionD({ title, subtitle, posts = [] }) {
   const rest = blogs.slice(2,5)
 
   return (
-    <section className="bg-background">
-      <div className="mx-auto max-w-7xl px-4 py-10 lg:px-6 lg:py-14">
+    <section className="bg-white">
+      <div className="mx-auto max-w-7xl px-4 py-10 lg:px-6 lg:py-8">
         <SectionHeader title={title} subtitle={subtitle} />
 
         {/* Top row: 2-col grid */}
         <div className="mb-6 grid gap-8 md:grid-cols-2">
           {main.map((post,index) => (
-            <article
+            <Link href={`/blog/${post?.Slug}`}
               key={index}
-              className="group cursor-pointer overflow-hidden border border-border bg-card transition-all hover:border-accent/30 hover:shadow-xl hover:-translate-y-2"
+              className="group cursor-pointer overflow-hidden border-[0.1px] rounded-2xl transition-all hover:border-accent/80 hover:-translate-y-[1px]"
             >
               <div className="relative aspect-video overflow-hidden">
                 <Image
@@ -79,16 +80,16 @@ export function BlogSectionD({ title, subtitle, posts = [] }) {
                   {post.MetaDescription}
                 </p>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
 
         {/* Bottom 3-col grid */}
         <div className="grid gap-8 md:grid-cols-3">
           {rest.map((post,index) => (
-            <article
+            <Link href={`/blog/${post?.Slug}`}
               key={index}
-              className="group cursor-pointer overflow-hidden border border-border bg-card transition-all hover:border-accent/30 hover:shadow-xl hover:-translate-y-2"
+              className="group cursor-pointer overflow-hidden border border-border bg-card transition-all hover:border-accent/80 hover:-translate-y-[1px] rounded-2xl "
             >
               <div className="relative aspect-video overflow-hidden">
                 <Image
@@ -120,7 +121,7 @@ export function BlogSectionD({ title, subtitle, posts = [] }) {
                   {post.MetaDescription}
                 </p>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>
@@ -189,9 +190,10 @@ function SectionHeader({ title, subtitle }) {
     <div className="mb-8 flex items-end justify-between">
       <div>
         <div className="mb-1.5 flex items-center gap-2">
-          <div className="h-5 w-1 bg-accent" />
+          {/* <div className="h-5 w-1 bg-accent" /> */}
           <h2 className="font-serif text-2xl font-bold md:text-3xl">
             {title}
+          <hr  className="h-1 bg-accent"/>
           </h2>
         </div>
         <p className="text-sm text-muted-foreground">{subtitle}</p>

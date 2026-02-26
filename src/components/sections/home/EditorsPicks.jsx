@@ -1,91 +1,128 @@
 import Image from "next/image"
 import { Clock, ArrowRight } from "lucide-react"
-import { useBlogs } from "@/contexts/BlogContext";
-import { getCategoryColor } from "@/lib/getCategoryColor";
+import { useBlogs } from "@/contexts/BlogContext"
+import { getCategoryColor } from "@/lib/getCategoryColor"
+import Link from "next/link"
+export function EditorsPicks() {
+  const { getBlogsByCategory } = useBlogs()
+  const blogs = getBlogsByCategory("Digital Marketing") || []
 
+  const main = blogs[0]
+  const rest = blogs.slice(1, 4)
 
-// const categoryColors = {
-//   AI: "bg-blue-600 text-blue-50",
-//   Business: "bg-indigo-600 text-indigo-50",
-//   Travel: "bg-sky-600 text-sky-50",
-//   Lifestyle: "bg-pink-600 text-pink-50",
-//   Technology: "bg-cyan-600 text-cyan-50",
-// }
-
-// function getColor(category) {
-//   return categoryColors[category] || "bg-accent text-accent-foreground"
-// }
-
-export function EditorsPicks({ picks }) {
-    const {getBlogsByCategory}=useBlogs();
-    const blogs = getBlogsByCategory("Digital Marketing");
   return (
-    <section className="border-y border-border bg-secondary/50">
-      <div className="mx-auto max-w-7xl px-4 py-10 lg:px-6 lg:py-14">
-        <div className="mb-8 flex items-end justify-between">
+    <section className=" bg-white">
+      <div className="mx-auto max-w-7xl px-4 py-12 lg:px-6 lg:py-8">
+
+        {/* Header */}
+        <div className="mb-10 flex items-end justify-between">
           <div>
             <div className="mb-1.5 flex items-center gap-2">
-              <div className="h-5 w-1 bg-accent" />
-              <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-                {"Editor's Picks"}
+              {/* <div className="h-5 w-1 bg-accent" /> */}
+              <h2 className="font-serif text-2xl font-bold md:text-3xl">
+                Editor&apos;s Picks
+          <hr  className="h-1 bg-accent"/>
               </h2>
             </div>
             <p className="text-sm text-muted-foreground">
-              Hand-picked stories our editors loved this week
+              Stories hand-picked by our editorial team
             </p>
           </div>
-          <button className="hidden items-center gap-1.5 text-xs font-bold text-accent uppercase tracking-wider transition-colors hover:text-accent/80 md:flex">
+
+          <button className="hidden md:flex items-center gap-1.5 text-xs font-bold uppercase text-accent">
             View All
             <ArrowRight className="h-3 w-3" />
           </button>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-4">
-          {blogs?.slice(0,4).map((pick, i) => (
-            <article
-              key={i}
-              className="group flex cursor-pointer flex-col overflow-hidden border border-border bg-card transition-all hover:border-accent/30 hover:shadow-lg hover:scale-105"
-            >
-              <div className="relative aspect-square overflow-hidden">
+        {/* Layout */}
+        <div className="grid gap-8 lg:grid-cols-3">
+
+          {/* HERO PICK */}
+          {main && (
+            <Link href={`/blog/${main?.Slug}`}
+             className="group relative lg:col-span-2 overflow-hidden rounded-2xl border hover:border-accent/80 cursor-pointer hover:translate-y-[1px] hover:shadow-md transition-all">
+              <div className="relative h-[420px]">
                 <Image
-                    src={pick?.HeroImg?.url || pick.image}
-                  alt={pick?.HeroAltText}
+                  src={main?.HeroImg?.url || main.image}
+                  alt={main?.HeroAltText || main.Title}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute left-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-accent/90 text-xs font-bold text-accent-foreground">
-                  {i + 1}
-                </div>
-              </div>
-              <div className="flex flex-1 flex-col justify-between p-3.5">
-                <div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+
+                <div className="absolute bottom-6 left-6 right-6 text-white">
                   <span
-                    className={`mb-1 inline-block rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${getCategoryColor(pick.Category)}`}
+                    className={`mb-3 inline-block rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${getCategoryColor(
+                      main.Category
+                    )}`}
                   >
-                    {pick.Category}
+                    {main.Category}
                   </span>
-                  <h3 className="mb-1.5 text-xs font-bold leading-snug text-card-foreground transition-colors group-hover:text-accent line-clamp-2">
-                    {pick.Title}
+
+                  <h3 className="mb-3 font-serif text-2xl font-bold leading-tight">
+                    {main.Title}
                   </h3>
-                  <p className="mb-2 text-xs leading-relaxed text-muted-foreground line-clamp-2">
-                    {pick.MetaDescription}
+
+                  <p className="mb-4 text-sm text-white/80 line-clamp-2">
+                    {main.MetaDescription}
                   </p>
-                </div>
-                <div className="space-y-1 border-t border-border/50 pt-2 text-[10px] text-muted-foreground">
-                  <div className="font-medium text-foreground/70">{pick.author}</div>
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
+
+                  {/* <div className="flex items-center gap-4 text-xs text-white/70">
                     <span>Feb 16, 2026</span>
-                    {1===1 && (
-                      <span className="flex items-center gap-1">
-                        <Clock className="h-3 w-3" />
-                        4 min read
-                      </span>
-                    )}
-                  </div>
+                    <span className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" />
+                      4 min read
+                    </span>
+                  </div> */}
                 </div>
               </div>
-            </article>
-          ))}
+            </Link>
+          )}
+
+          {/* SIDE PICKS */}
+          <div className="flex flex-col gap-6">
+            {rest.map((post, i) => (
+              <Link href={`/blog/${post?.Slug}`}
+                key={i}
+                className="group flex cursor-pointer gap-4 overflow-hidden rounded-lg border transition-all hover:-translate-y-[1px] hover:shadow-md hover:border-accent/80"
+              >
+                <div className="relative h-auto w-28 flex-shrink-0 overflow-hidden rounded-md">
+                  <Image
+                    src={post?.HeroImg?.url || post.image}
+                    alt={post?.HeroAltText || post.Title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+
+                <div className="flex flex-1 flex-col justify-between p-3">
+                  <div>
+                    <span
+                      className={`mb-1 inline-block rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${getCategoryColor(
+                        post.Category
+                      )}`}
+                    >
+                      {post.Category}
+                    </span>
+
+                    <h4 className="mb-1 text-sm font-bold leading-snug group-hover:text-accent line-clamp-2">
+                      {post.Title}
+                    </h4>
+                  </div>
+
+                  {/* <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                    <span>Feb 16, 2026</span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" />
+                      4 min read
+                    </span>
+                  </div> */}
+                </div>
+              </Link>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>

@@ -1,180 +1,87 @@
 "use client"
 
-import { useState, useMemo } from "react"
-import Image from "next/image"
-import { Clock, ArrowRight } from "lucide-react"
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination"
-import { getCategoryColor } from "@/lib/getCategoryColor"
+import { useBlogs } from "@/contexts/BlogContext"
+import { BlogCard } from "./BlogCard"
+import { CategoryPagination } from "./CategoryPagination"
+import Link from "next/link"
 
-const POSTS_PER_PAGE = 9
 
-export function CategoryBlogGrid({ blogs = [] }) {
-  const [currentPage, setCurrentPage] = useState(1)
+export function CategoryBlogGrid() {
+  const { catBlogs, catLoading, catError } = useBlogs()
 
-  const totalPages = Math.ceil(blogs.length / POSTS_PER_PAGE)
-
-  const paginatedBlogs = useMemo(() => {
-    const startIndex = (currentPage - 1) * POSTS_PER_PAGE
-    return blogs.slice(startIndex, startIndex + POSTS_PER_PAGE)
-  }, [blogs, currentPage])
-
-  const getPaginationItems = () => {
-    const items = []
-    const maxVisible = 5
-
-    if (totalPages <= maxVisible) {
-      for (let i = 1; i <= totalPages; i++) items.push(i)
-    } else {
-      items.push(1)
-
-      if (currentPage > 3) items.push("...")
-
-      for (
-        let i = Math.max(2, currentPage - 1);
-        i <= Math.min(totalPages - 1, currentPage + 1);
-        i++
-      ) {
-        items.push(i)
-      }
-
-      if (currentPage < totalPages - 2) items.push("...")
-
-      items.push(totalPages)
-    }
-
-    return items
-  }
+  if (catLoading) return <p className="text-center py-20 h-screen">Loading...</p>
+  if (catError) return <p className="text-center text-red-500">{catError}</p>
+  if (!catBlogs.length) return <p className="text-center">No blogs found</p>
 
   return (
-    <div>
-      {/* BLOG GRID */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-        {paginatedBlogs.map((post, index) => (
-          <article
-            key={index}
-            className="group cursor-pointer overflow-hidden border border-border bg-card transition-all hover:border-accent/30 hover:shadow-lg"
-          >
-            {/* Image */}
-            <div className="relative aspect-[16/10] overflow-hidden bg-muted">
-              <Image
-                src={post.HeroImg?.url || post.image}
-                alt={post.HeroAltText || post.Title}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-
-              <span
-                className={`absolute left-0 top-3 rounded-r px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${getCategoryColor(
-                  post.Category
-                )}`}
-              >
-                {post.Category}
-              </span>
-            </div>
-
-            {/* Content */}
-            <div className="flex flex-col p-5">
-              <div className="mb-2 flex items-center gap-3 text-xs text-muted-foreground">
-                <span>
-                  {post.createdAt
-                    ? new Date(post.createdAt).toDateString()
-                    : ""}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Clock className="h-3 w-3" />
-                  4 min read
-                </span>
-              </div>
-
-              <h3 className="mb-2 font-serif text-base font-bold leading-snug line-clamp-2 transition-colors group-hover:text-accent">
-                {post.Title}
-              </h3>
-
-              <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-2">
-                {post.MetaDescription}
-              </p>
-
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-muted-foreground">
-                  By {post.author || "Admin"}
-                </span>
-                <ArrowRight className="h-3.5 w-3.5 text-accent opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100" />
-              </div>
-            </div>
-          </article>
-        ))}
+    <>
+       <>
+      <Grid cols="md:grid-cols-2" data={catBlogs.slice(0, 2)} large />
+      <Grid cols="md:grid-cols-3" data={catBlogs.slice(2, 5)} />
+      <Grid cols="md:grid-cols-3" data={catBlogs.slice(5, 8)} />
+      <Grid cols="md:grid-cols-2" data={catBlogs.slice(8, 10)} />
+      <Grid cols="md:grid-cols-3" data={catBlogs.slice(10, 13)} />
+      <Grid cols="md:grid-cols-2 lg:grid-cols-4" data={catBlogs.slice(13, 17)} />
+      <Grid cols="md:grid-cols-3" data={catBlogs.slice(17)} />
+    </>
+       <div className="pb-4">
+      <CategoryPagination />
       </div>
-
-      {/* PAGINATION (STATE ONLY, NO URL CHANGE) */}
-      {totalPages > 1 && (
-        <div className="mt-12 flex justify-center">
-          <Pagination>
-            <PaginationContent>
-              {/* Previous */}
-              <PaginationItem>
-                <PaginationPrevious
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    setCurrentPage((p) => Math.max(1, p - 1))
-                  }}
-                  className={
-                    currentPage === 1
-                      ? "pointer-events-none opacity-50"
-                      : ""
-                  }
-                />
-              </PaginationItem>
-
-              {/* Page Numbers */}
-              {getPaginationItems().map((item, index) => (
-                <PaginationItem key={index}>
-                  {item === "..." ? (
-                    <PaginationEllipsis />
-                  ) : (
-                    <PaginationLink
-                      href="#"
-                      isActive={item === currentPage}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        setCurrentPage(item)
-                      }}
-                    >
-                      {item}
-                    </PaginationLink>
-                  )}
-                </PaginationItem>
-              ))}
-
-              {/* Next */}
-              <PaginationItem>
-                <PaginationNext
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    setCurrentPage((p) =>
-                      Math.min(totalPages, p + 1)
-                    )
-                  }}
-                  className={
-                    currentPage === totalPages
-                      ? "pointer-events-none opacity-50"
-                      : ""
-                  }
-                />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-        </div>
-      )}
-    </div>
+    </>
   )
+}
+
+
+function Grid({ data, cols, large }) {
+  if (!data.length) return null;
+
+  return (
+    <div className={`grid grid-cols-1 ${cols} gap-8 mb-16`}>
+      {data.map((item) => (
+        <Card key={item._id} item={item} large={large} />
+      ))}
+    </div>
+  );
+}
+
+/* ================= CARD ================= */
+function Card({ item, large }) {
+  return (
+    <div className="h-full">
+      <Link href={`/blog/${item.Slug}`}
+        className="
+          group h-full rounded-2xl overflow-hidden bg-white border
+          hover:border-accent/80 hover:-translate-y-[1px]
+          transition cursor-pointer
+          flex flex-col
+        "
+      >
+        {/* IMAGE */}
+        <img
+          src={item?.HeroImg?.url}
+          alt={item.Title}
+          className={`w-full ${
+            large ? "h-[320px]" : "h-[240px]"
+          } object-cover group-hover:scale-105 transition`}
+        />
+
+        {/* CONTENT */}
+        <div className="p-5 flex flex-col flex-1">
+          <h3
+            className={`${
+              large ? "text-[22px]" : "text-[18px]"
+            } font-semibold line-clamp-2`}
+          >
+            {item.Title}
+          </h3>
+
+          <p className="text-gray-500 text-sm mt-3 line-clamp-2 flex-1">
+            {item.MetaDescription}
+          </p>
+
+         
+        </div>
+      </Link>
+    </div>
+  );
 }

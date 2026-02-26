@@ -12,35 +12,38 @@ import { BlogPost } from "@/data/categories"
 
 
 export function BlogDetailContent({ post }) {
-  const initials = post.author
-    .split(" ")
-    .map(n => n[0])
-    .join("")
-    .toUpperCase()
+  const single = post?.blog;
+  // const initials = post.author
+  //   .split(" ")
+  //   .map(n => n[0])
+  //   .join("")
+  //   .toUpperCase()
 
   return (
     <article className="space-y-6">
       {/* Header Section */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
-          <Badge variant="secondary">{post.category}</Badge>
-          <span className="text-sm text-muted-foreground">•</span>
+          <Link href={`/${single?.Category?.toLowerCase().replace(/\s+/g, "-")}`}>
+          <Badge variant="secondary">{single.Category}</Badge>
+          </Link>
+          {/* <span className="text-sm text-muted-foreground">•</span>
           <span className="text-sm text-muted-foreground">{post.date}</span>
           <span className="text-sm text-muted-foreground">•</span>
-          <span className="text-sm text-muted-foreground">{post.readTime} read</span>
+          <span className="text-sm text-muted-foreground">{post.readTime} read</span> */}
         </div>
 
         <h1 className="font-playfair text-4xl font-bold leading-tight text-balance md:text-5xl">
-          {post.title}
+          {single.Title}
         </h1>
 
-        <p className="text-lg text-muted-foreground text-balance">
+        {/* <p className="text-lg text-muted-foreground text-balance">
           {post.description}
-        </p>
+        </p> */}
       </div>
 
       {/* Author Section */}
-      <div className="flex items-center justify-between rounded-lg bg-card p-4">
+      {/* <div className="flex items-center justify-between rounded-lg bg-card p-4">
         <div className="flex items-center gap-3">
           <Avatar className="h-12 w-12">
             <AvatarImage 
@@ -55,13 +58,13 @@ export function BlogDetailContent({ post }) {
           </div>
         </div>
         <Button variant="outline" size="sm">Follow</Button>
-      </div>
+      </div> */}
 
       {/* Featured Image */}
       <div className="relative aspect-video overflow-hidden rounded-lg">
         <Image
-          src={post.image}
-          alt={post.title}
+          src={single.HeroImg.url}
+          alt={single?.HeroAltText || "Digital Marketing Company In India"}
           fill
           className="object-cover"
           priority
@@ -69,7 +72,7 @@ export function BlogDetailContent({ post }) {
       </div>
 
       {/* Content */}
-      <div className="prose prose-sm dark:prose-invert max-w-none">
+      {/* <div className="prose prose-sm dark:prose-invert max-w-none">
         <h2>Introduction</h2>
         <p>
           {post.description} This comprehensive guide will walk you through everything you need to know about this topic, providing practical insights and actionable strategies.
@@ -107,10 +110,47 @@ export function BlogDetailContent({ post }) {
         <p>
           This topic continues to evolve rapidly. By staying informed and applying these principles, you'll be well-positioned to succeed. Keep learning, experimenting, and sharing your knowledge with others.
         </p>
-      </div>
+      </div> */}
+        <div className="">
+            {/* Blog Content */}
+            {single.Content?.map((section) => (
+              <div key={section?._id} className="">
+                <div
+                  dangerouslySetInnerHTML={{ __html: section?.content }}
+                  className="text-gray-800 leading-relaxed ql-editor quill-content "
+                />
+                {section?.img?.url && (
+                  <img
+                    src={section.img.url}
+                    alt={section?.img?.altText || "Digital Marketing Company In India"}
+                    className="rounded-lg mt-2 mb-4 w-full max-h-90"
+                  />
+                )}
+              </div>
+            ))}
+            {single?.FAQs?.length > 0 && (
+              <div className="mt-10">
+                <h2 className="text-2xl font-semibold mb-4 text-gray-900">
+                  FAQs
+                </h2>
+                {single.FAQs.map((faq, i) => (
+                  <details
+                    key={i}
+                    className="border-b border-gray-200 py-3 cursor-pointer group"
+                  >
+                    <summary className="font-semibold text-gray-800">
+                      {faq.Q}
+                    </summary>
+                    <p className="mt-2 text-gray-600">{faq.A}</p>
+                  </details>
+                ))}
+              </div>
+            )}
+            </div>
+
 
       {/* Action Buttons */}
-      <div className="flex flex-wrap gap-3 pt-6 border-t">
+      {/* <div className="flex flex-wrap gap-3 pt-6 border-t">
         <Button variant="outline" size="sm" className="gap-2">
           <Heart className="h-4 w-4" />
           Helpful
@@ -123,10 +163,10 @@ export function BlogDetailContent({ post }) {
           <Share2 className="h-4 w-4" />
           Share
         </Button>
-      </div>
+      </div> */}
 
       {/* Related Tags */}
-      <div className="space-y-3 pt-4">
+      {/* <div className="space-y-3 pt-4">
         <h3 className="font-semibold text-sm">Tags</h3>
         <div className="flex flex-wrap gap-2">
           <Badge variant="secondary">{post.subcategory}</Badge>
@@ -134,7 +174,7 @@ export function BlogDetailContent({ post }) {
           <Badge variant="secondary">Tutorial</Badge>
           <Badge variant="secondary">Guide</Badge>
         </div>
-      </div>
+      </div> */}
     </article>
   )
 }
