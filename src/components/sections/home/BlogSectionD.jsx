@@ -33,7 +33,7 @@ import Link from "next/link"
    ────────────────────────────────────────────── */
 export function BlogSectionD({ title, subtitle, posts = [] }) {
     const {getBlogsByCategory}=useBlogs();
-    const blogs = getBlogsByCategory("Digital Marketing");
+    const blogs = getBlogsByCategory("POLITICS");
 
   const main = blogs?.slice(0,2)
   const rest = blogs.slice(2,5)

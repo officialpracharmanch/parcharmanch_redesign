@@ -5,7 +5,7 @@ import { getCategoryColor } from "@/lib/getCategoryColor"
 import Link from "next/link"
 export function BlogSectionB({ title, subtitle }) {
   const { getBlogsByCategory } = useBlogs()
-  const blogs = getBlogsByCategory("Digital Marketing") || []
+  const blogs = getBlogsByCategory("REAL ESTATE") || []
 
   return (
     <section className="bg-white">

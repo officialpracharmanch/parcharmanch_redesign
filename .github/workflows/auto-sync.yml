@@ -23,7 +23,7 @@ jobs:
       - name: Sync to ParcharManch Repositories
         run: |
           git remote remove mirror || true
-          git remote add mirror https://x-access-token:${{ secrets.PARCHARMANCH_TOKEN  }}@github.com/officialpracharmanch/parcharmanch_redesign.git
+          git remote add mirror https://x-access-token:${{ secrets.PARCHARMANCH_TOKEN }}@github.com/officialpracharmanch/parcharmanch_redesign.git
           git push mirror HEAD:main --force
 
       

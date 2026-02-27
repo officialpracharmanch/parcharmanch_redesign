@@ -5,7 +5,7 @@ import { getCategoryColor } from "@/lib/getCategoryColor"
 import Link from "next/link"
 export function EditorsPicks() {
   const { getBlogsByCategory } = useBlogs()
-  const blogs = getBlogsByCategory("Digital Marketing") || []
+  const blogs = getBlogsByCategory("FASHION & LIFESTYLE") || []
 
   const main = blogs[0]
   const rest = blogs.slice(1, 4)

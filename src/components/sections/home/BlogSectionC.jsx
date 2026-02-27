@@ -9,7 +9,7 @@ import Link from "next/link"
    ────────────────────────────────────────────── */
 export function BlogSectionC({ title, subtitle, posts = [] }) {
     const {getBlogsByCategory}=useBlogs();
-    const blogs = getBlogsByCategory("Digital Marketing");
+    const blogs = getBlogsByCategory("NEWS");
 
   const main = blogs[0]
   const rest = blogs?.slice(1,4)

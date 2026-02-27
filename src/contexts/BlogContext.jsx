@@ -50,13 +50,14 @@ export const BlogProvider = ({ children }) => {
   )
 // ***********************************************************************
  const [catBlogs, catSetBlogs] = useState([]);
-  const [catLoading, catSetLoading] = useState(false);
+  const [catLoading, catSetLoading] = useState(true);
   const [catError, catSetError] = useState(null);
 
   // inputs as state
-  const [category, setCategory] = useState("Digital Marketing");
+  const [category, setCategory] = useState(null);
   const [catPage, setCatPage] = useState(1);
   const [catTotalPages, setCatTotalPages] = useState(1);
+  const [subCategory, setSubCategory] = useState(null);
 
     const fetchCatBlogs = async () => {
       try {
@@ -64,10 +65,10 @@ export const BlogProvider = ({ children }) => {
         catSetError(null);
          console.log("api call",category)
         const res = await axios.get(
-          `https://parcharmanch-backend-7kc7.onrender.com/parcharmanch/getBlogsByCategory/${category}?page=${catPage}&limit=10`
+          `https://parcharmanch-backend-7kc7.onrender.com/parcharmanch/getBlogsByCategory/${category}/${subCategory}?page=${catPage}&limit=10`
         );
 
-        catSetBlogs(res.data.data);
+        catSetBlogs(res?.data?.blogs);
         console.log("data =>",res?.data);
         setCatTotalPages(res?.data?.pagination?.totalPages || 1);
         
@@ -84,11 +85,11 @@ export const BlogProvider = ({ children }) => {
     useEffect(() => {
     if (!category) return;
     fetchCatBlogs();
-  }, [category, catPage]); // 🔥 simple dependency
+  }, [category, catPage, subCategory]); // 🔥 simple dependency
 // ******************************************************************
   return (
     <BlogContext.Provider
-      value={{blogs,loading,error,page,setPage,totalPages,fetchBlogs,getBlogsByCategory,catBlogs,catLoading,catError,catPage,setCatPage,setCategory,setCatTotalPages,catTotalPages
+      value={{blogs,loading,error,page,setPage,totalPages,fetchBlogs,getBlogsByCategory,catBlogs,catLoading,catError,catPage,setCatPage,setCategory,setCatTotalPages,catTotalPages,setSubCategory
       }}
     >
       {children}
