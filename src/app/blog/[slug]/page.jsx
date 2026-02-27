@@ -2,15 +2,15 @@ import React from "react";
 import BlogDetails from "./BlogDetails";
 
 // ✅ Helper: Fetch blog data once (for metadata + content)
-async function getBlogData(id) {
+async function getBlogData(slug) {
   let loading = true;
   let data = null;
   let error = null;
 
   try {
-    console.log("id =>",id)
+    console.log("slug =>",slug)
     const res = await fetch(
-      `https://parcharmanch-backend-7kc7.onrender.com/parcharmanch/getBlogBySlug/${id}`,
+      `https://parcharmanch-backend-7kc7.onrender.com/parcharmanch/getBlogBySlug/${slug}`,
       {
          cache: "force-cache",
         next: { revalidate: 120 }, // revalidate every 2 minutes
@@ -34,8 +34,8 @@ async function getBlogData(id) {
 
 // ✅ Metadata (uses same API)
 export async function generateMetadata({ params }) {
-  const { id } = await params;
-  const { data } = await getBlogData(id);
+  const { slug } = await params;
+  const { data } = await getBlogData(slug);
   
 
   const single = data?.blog;
@@ -53,15 +53,15 @@ export async function generateMetadata({ params }) {
       single?.MetaDescription ||
       "Read insightful stories and blogs on Parcharmanch.",
     alternates: {
-      canonical: `https://www.parcharmanch.in/blog/${id}`,
+      canonical: `https://www.parcharmanch.in/blog/${slug}`,
     },
   };
 }
 
 // ✅ Main Blog Page (SSR)
 export default async function Page({ params }) {
-  const { id } = await params;
-  const { data, error, loading } = await getBlogData(id);
+  const { slug } = await params;
+  const { data, error, loading } = await getBlogData(slug);
 
   if (error) {
     return (

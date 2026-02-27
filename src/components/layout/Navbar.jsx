@@ -4,7 +4,8 @@ import Link from "next/link"
 import { ChevronDown, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { AuthModal } from "../auth/AuthModal"
-import {createSlug} from "@/lib/helper"
+import {createSlug} from "@/lib/helper";
+import { useRouter } from "next/navigation"
 const categories = [
   {
     name: "HEALTH",
@@ -28,6 +29,7 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false)
+  const router = useRouter()
 
   return (
     <header className="sticky top-0 z-50 bg-accent shadow-md">
@@ -57,36 +59,43 @@ export function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-0.5 lg:flex">
-          {categories.map((category) => (
-            <Link href={`/${createSlug(category?.name)}`}
-              key={category.name}
-              className="group relative "
-              onMouseEnter={() => setOpenDropdown(category.name)}
-              onMouseLeave={() => setOpenDropdown(false)}
-            >
-              <button className="flex items-center gap-1 px-3 py-2 text-sm cursor-pointer font-medium text-white transition-colors hover:text-primary-foreground">
-                {category.name}
-                <ChevronDown className="h-3 w-3 transition-transform group-hover:rotate-180" />
-              </button>
-              {openDropdown === category.name && (
-                <div className="absolute left-0 top-full pt-1">
-                  <div className="min-w-[200px] rounded border border-border bg-card p-1.5 shadow-xl">
-                    {category.subcategories.map((sub,i) => (
-                      <Link
-                      href={`/${sub.toLowerCase().replace(/\s+/g, "-")}`}
-                        key={i}
-                        onClick={()=>{setOpenDropdown(false)}}
-                        className="block rounded px-3 py-2 text-sm text-card-foreground transition-colors hover:bg-secondary"
-                      >
-                        {sub}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </Link>
-          ))}
+  {categories.map((category) => (
+    <div
+      key={category.name}
+      className="group relative"
+      onMouseEnter={() => setOpenDropdown(category.name)}
+      onMouseLeave={() => setOpenDropdown(false)}
+    >
+      {/* ✅ Parent clickable */}
+      <button
+        type="button"
+        onClick={() => router.push(`/${createSlug(category.name)}`)}
+        className="flex items-center gap-1 px-3 py-2 text-sm cursor-pointer font-medium text-white transition-colors hover:text-primary-foreground"
+      >
+        {category.name}
+        <ChevronDown className="h-3 w-3 transition-transform group-hover:rotate-180" />
+      </button>
+
+      {/* Dropdown */}
+      {openDropdown === category.name && (
+        <div className="absolute left-0 top-full pt-1">
+          <div className="min-w-[200px] rounded border border-border bg-card p-1.5 shadow-xl">
+            {category.subcategories.map((sub, i) => (
+              <Link
+                key={i}
+                href={`/${createSlug(sub)}`}
+                onClick={() => setOpenDropdown(false)}
+                className="block rounded px-3 py-2 text-sm text-card-foreground transition-colors hover:bg-secondary"
+              >
+                {sub}
+              </Link>
+            ))}
+          </div>
         </div>
+      )}
+    </div>
+  ))}
+</div>
 
         {/* Right Side */}
         <div className="flex items-center gap-2">
