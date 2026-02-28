@@ -84,7 +84,7 @@ export function HeroSection({ featured, trending }) {
                 iconColor: "text-yellow-600 dark:text-yellow-400",
               },
               {
-                name: "Other (General)",
+                name: "Other",
                 description: "Insights, Ideas, and Topics Beyond Categories",
                 icon: BookOpen,
                 bgColor: "bg-[#E491C9] dark:bg-purple-900/30",
