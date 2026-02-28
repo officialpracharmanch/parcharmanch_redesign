@@ -77,7 +77,7 @@ export function HeroSection({ featured, trending }) {
                 iconColor: "text-white dark:text-amber-400",
               },
               {
-                name: "Latest News",
+                name: "News",
                 description: "Breaking Stories That Matter Most Today",
                 icon: Zap,
                 bgColor: "bg-[#0C7779] dark:bg-yellow-900/30",
