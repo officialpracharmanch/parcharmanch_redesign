@@ -1,28 +1,29 @@
 const categoryColors = {
-  "Real Estate": "bg-blue-600 text-blue-50",
-  "Programming": "bg-emerald-600 text-emerald-50",
-  "Gadgets": "bg-orange-600 text-orange-50",
-  "Technology": "bg-cyan-600 text-cyan-50",
-  "Startups": "bg-rose-600 text-rose-50",
-  "Marketing": "bg-amber-600 text-amber-50",
-  "Finance": "bg-teal-600 text-teal-50",
-  "Business": "bg-indigo-600 text-indigo-50",
-  "Health": "bg-green-600 text-green-50",
-  "Travel": "bg-sky-600 text-sky-50",
-  "Productivity": "bg-stone-600 text-stone-50",
-  "Lifestyle": "bg-pink-600 text-pink-50",
-  "Education": "bg-violet-600 text-violet-50",
-  "Tutorials": "bg-fuchsia-600 text-fuchsia-50",
-  "Career": "bg-lime-600 text-lime-50",
-  "Learning": "bg-purple-600 text-purple-50"
+  "REAL ESTATE": "bg-[#6367FF] text-[#EFF6FF]",     // blue-600
+  "HEALTH": "bg-[#84B179] text-[#F3FAF6]",
+  "NEWS": "bg-[#0C7779] text-[#F0F9FF]",         // sky-600
+  "POLITICS": "bg-[#C00707] text-[#FAFAF9]",  // stone-600
+  "FASHION & LIFESTYLE": "bg-[#E36A6A] text-[#FDF2F8]",     // pink-600
+  "OTHERS": "bg-[#E491C9] text-[#F5F3FF]",     // violet-600
+  // "Programming": "bg-[#059669] text-[#ECFDF5]",    // emerald-600
+  // "Gadgets": "bg-[#EA580C] text-[#FFF7ED]",        // orange-600
+  // "Technology": "bg-[#0891B2] text-[#ECFEFF]",     // cyan-600
+  // "Startups": "bg-[#E11D48] text-[#FFF1F2]",       // rose-600
+  // "Marketing": "bg-[#D97706] text-[#FFFBEB]",      // amber-600
+  // "Finance": "bg-[#0D9488] text-[#F0FDFA]",        // teal-600
+  // "Business": "bg-[#4F46E5] text-[#EEF2FF]",       // indigo-600
+
+  // "Tutorials": "bg-[#C026D3] text-[#FDF4FF]",     // fuchsia-600
+  // "Career": "bg-[#65A30D] text-[#F7FEE7]",         // lime-600
+  // "Learning": "bg-[#9333EA] text-[#FAF5FF]"        // purple-600
 }
 
 export function getCategoryColor(category) {
-  if (!category) return "bg-gray-600 text-gray-50"
+  if (!category) return "bg-[#525252] text-[#FAFAFA]"
 
   return (
     categoryColors[category] ||
     categoryColors[category.trim()] ||
-    "bg-gray-600 text-gray-50"
+    "bg-[#525252] text-[#FAFAFA]"
   )
 }
