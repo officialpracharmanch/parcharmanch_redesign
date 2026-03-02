@@ -3,7 +3,7 @@ const categoryColors = {
   "HEALTH": "bg-[#84B179] text-[#F3FAF6]",
   "NEWS": "bg-[#0C7779] text-[#F0F9FF]",         // sky-600
   "POLITICS": "bg-[#C00707] text-[#FAFAF9]",  // stone-600
-  "FASHION & LIFESTYLE": "bg-[#E36A6A] text-[#FDF2F8]",     // pink-600
+  "FASHION & LIFESTYLE": "bg-[#FF3E9B] text-[#FDF2F8]",     // pink-600
   "OTHERS": "bg-[#E491C9] text-[#F5F3FF]",     // violet-600
   // "Programming": "bg-[#059669] text-[#ECFDF5]",    // emerald-600
   // "Gadgets": "bg-[#EA580C] text-[#FFF7ED]",        // orange-600
@@ -25,5 +25,47 @@ export function getCategoryColor(category) {
     categoryColors[category] ||
     categoryColors[category.trim()] ||
     "bg-[#525252] text-[#FAFAFA]"
+  )
+}
+
+// *********************************************************
+const categoryColorsText = {
+  "REAL ESTATE": "text-[#6367FF]",     // blue-600
+  "HEALTH": "text-[#84B179]",
+  "NEWS": "text-[#0C7779]",         // sky-600
+  "POLITICS": "text-[#C00707]",  // stone-600
+  "FASHION & LIFESTYLE": "text-[#F39EB6]",     // pink-600
+  "OTHER": "text-[#853953]",     // violet-600
+  
+}
+
+export function getCategoryText(category) {
+  if (!category) return " text-[#FAFAFA]"
+
+  return (
+    categoryColorsText[category] ||
+    categoryColorsText[category.trim()] ||
+    "text-[#FAFAFA]"
+  )
+}
+
+// *************************************************************
+const categoryHoverText = {
+  "REAL ESTATE": "group-hover:text-[#6367FF] hover:text-[#6367FF]",     // blue-600
+  "HEALTH": "group-hover:text-[#84B179]",
+  "NEWS": "group-hover:text-[#0C7779]",         // sky-600
+  "POLITICS": "group-hover:text-[#C00707]",  // stone-600
+  "FASHION & LIFESTYLE": "group-hover:text-[#F39EB6]",     // pink-600
+  "OTHER": "group-hover:text-[#853953]",     // violet-600
+  
+}
+
+export function getCategoryHoverText(category) {
+  if (!category) return "group-hover:text-[#FAFAFA]"
+
+  return (
+    categoryHoverText[category] ||
+    categoryHoverText[category.trim()] ||
+    "group-hover:text-[#FAFAFA]"
   )
 }

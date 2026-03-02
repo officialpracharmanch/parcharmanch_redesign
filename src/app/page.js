@@ -1,4 +1,6 @@
 "use client"
+import BlogGrid from "@/components/sections/home/BlogGrid";
+import Blogs from "@/components/sections/home/Blogs";
 import { BlogSectionA } from "@/components/sections/home/BlogSectionA";
 import { BlogSectionB } from "@/components/sections/home/BlogSectionB";
 import { BlogSectionC } from "@/components/sections/home/BlogSectionC";
@@ -303,36 +305,45 @@ const topAuthorsData = [
     <HeroSection featured={featuredPost} trending={trendingPosts}/>
     {/* <StatsBar/> */}
     {/* <CategoriesStrip/> */}
-    <BlogSectionA 
+    {/* <BlogSectionA 
     title="Technology"
     subtitle="AI, programming, gadgets, and the future of tech"
     posts={technologyPosts}
     
-    />
+    /> */}
 
-    <BlogSectionB  
+    {/* <BlogSectionB  
      title="Business"
      subtitle="Startups, marketing, finance, and leadership insights"
       posts={businessPosts}
     
-    />
+    /> */}
 
-    <EditorsPicks picks={editorsPicksData}  />
+    {/* <EditorsPicks picks={editorsPicksData}  /> */}
 
-    <BlogSectionC 
+    {/* <BlogSectionC 
     title="Lifestyle"
     subtitle="Health, travel, productivity, and mindful living"
     posts={lifestylePosts}
-    /> 
+    />  */}
 
    {/* <NewsletterCta/> */}
-    <BlogSectionD  
+    {/* <BlogSectionD  
      title="Education"
     subtitle="Online learning, career growth, tutorials, and resources"
     posts={educationPosts}
-    />
+    /> */}
 
     {/* <TopAuthors  authors={topAuthorsData} /> */}
+    <Blogs
+    title="Education"
+    subtitle="Online learning, career growth, tutorials, and resources"
+    posts={educationPosts}
+    
+    />
+
+   <BlogGrid/>
+
   </>
   );
 }

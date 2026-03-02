@@ -26,7 +26,7 @@ const decodedSubCategory = decodeURIComponent(subcat?.[0])
   }, [category,subcat, setCategory, setSubCategory])
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-accent-foreground">
       <HealthPage />
       <section className="max-w-7xl mx-auto px-4">
         <CategoryBlogGrid />

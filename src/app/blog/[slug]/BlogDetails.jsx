@@ -9,7 +9,7 @@ import { LatestBlogsSidebar } from "@/components/blog/LatestBlogsSidebar"
 export default function BlogDetails({post}) {
   
     return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-accent-foreground">
       
       <main className="mx-auto max-w-7xl px-4 py-8 lg:px-6 lg:py-12">
         <div className="grid gap-8 lg:grid-cols-3">

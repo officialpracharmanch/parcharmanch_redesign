@@ -10,29 +10,34 @@ export const BlogProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);     // 🔹 Dynamic Page
-  const [limit, setLimit] = useState(50);  
-  const [totalPages, setTotalPages] = useState(1);
+  const [limit, setLimit] = useState(6);  
+  const [totalPages, setTotalPages] = useState(15);
 
   const fetchBlogs = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get("https://parcharmanch-backend-7kc7.onrender.com/parcharmanch/getBlogs", {
+  setLoading(true);
+  try {
+    const res = await axios.get(
+      "https://parcharmanch-backend-7kc7.onrender.com/parcharmanch/getBlogs",
+      {
         params: { page, limit },
-      });
-
-      if (res.data.success) {
-        setBlogs(res.data.blogs);
-        setTotalPages(res.data.totalPages || 1); // agar API pages bhej rahi hai
-      } else {
-        setError("Failed to fetch blogs");
       }
-    } catch (err) {
-      setError("Error loading blog content");
-    } finally {
-      setLoading(false);
-    }
-  };
+    );
 
+    if (res.data.success) {
+      setBlogs((prev) =>
+        page === 1 ? res.data.blogs : [...prev, ...res.data.blogs]
+      );
+
+      setTotalPages(res.data.totalPages || 1);
+    } else {
+      setError("Failed to fetch blogs");
+    }
+  } catch (err) {
+    setError("Error loading blog content");
+  } finally {
+    setLoading(false);
+  }
+};
   useEffect(() => {
     fetchBlogs();
   }, [page]); // page  change hone par call hoga
@@ -65,12 +70,14 @@ export const BlogProvider = ({ children }) => {
         catSetError(null);
          console.log("api call",category)
         const res = await axios.get(
-          `https://parcharmanch-backend-7kc7.onrender.com/parcharmanch/getBlogsByCategory/${category}/${subCategory}?page=${catPage}&limit=10`
+          `https://parcharmanch-backend-7kc7.onrender.com/parcharmanch/getBlogsByCategory/${category}/${subCategory}?page=${catPage}&limit=15`
         );
 
-        catSetBlogs(res?.data?.blogs);
+        catSetBlogs((prev) =>
+        catPage === 1 ? res.data.blogs : [...prev, ...res.data.blogs]
+      );
         console.log("data =>",res?.data);
-        setCatTotalPages(res?.data?.pagination?.totalPages || 1);
+        setCatTotalPages(res?.data?.totalPages || 1);
         
       } catch (err) {
         catSetError(

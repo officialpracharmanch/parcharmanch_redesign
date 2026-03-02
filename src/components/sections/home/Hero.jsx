@@ -6,7 +6,7 @@ import Link from "next/link"
 
 export function HeroSection({ featured, trending }) {
   return (
-    <section className="bg-card">
+    <section className="bg-accent-foreground">
       <div className="mx-auto grid max-w-7xl lg:grid-cols-3">
         {/* Featured Post - Left 2/3 */}
         <div className="group relative lg:col-span-2  mt-4">
@@ -52,43 +52,43 @@ export function HeroSection({ featured, trending }) {
                 name: "Real Estate",
                 description: "Smart Moves for Buying, Selling, Investing Property",
                 icon: Building2,
-                bgColor: "bg-[#6367FF] dark:bg-blue-900/30",
-                iconColor: "text-white dark:text-blue-400",
+                 bgColor: "bg-blue-100 dark:bg-blue-900/30",
+                iconColor: "text-blue-600 dark:text-blue-400",
               },
               {
                 name: "Fashion & Lifestyle",
                 description: "Style Trends That Shape Your Everyday Living",
                 icon: Sparkles,
-                bgColor: "bg-[#E36A6A] dark:bg-pink-900/30",
-                iconColor: "text-white dark:text-pink-400",
+                bgColor: "bg-pink-100 dark:bg-pink-900/30",
+                iconColor: "text-pink-600 dark:text-pink-400",
               },
               {
                 name: "Health",
                 description: "Better Habits for a Stronger, Happier Life",
                 icon: Heart,
-                bgColor: "bg-[#84B179] dark:bg-red-900/30",
-                iconColor: "text-white dark:text-red-400",
+                bgColor: "bg-red-100 dark:bg-red-900/30",
+                iconColor: "text-red-600 dark:text-red-400",
               },
               {
                 name: "Politics",
                 description: "Power, Policies, and Decisions That Shape Nations",
                 icon: Gavel,
-                bgColor: "bg-[#C00707] dark:bg-amber-900/30",
-                iconColor: "text-white dark:text-amber-400",
+                bgColor: "bg-amber-100 dark:bg-amber-900/30",
+                iconColor: "text-amber-600 dark:text-amber-400",
               },
               {
                 name: "News",
                 description: "Breaking Stories That Matter Most Today",
                 icon: Zap,
-                bgColor: "bg-[#0C7779] dark:bg-yellow-900/30",
+                bgColor: "bg-yellow-100 dark:bg-yellow-900/30",
                 iconColor: "text-yellow-600 dark:text-yellow-400",
               },
               {
                 name: "Other",
                 description: "Insights, Ideas, and Topics Beyond Categories",
                 icon: BookOpen,
-                bgColor: "bg-[#E491C9] dark:bg-purple-900/30",
-                iconColor: "text-white dark:text-purple-400",
+                bgColor: "bg-purple-100 dark:bg-purple-900/30",
+                iconColor: "text-purple-600 dark:text-purple-400",
               },
             ].map((category) => {
               const Icon = category.icon
@@ -100,10 +100,10 @@ export function HeroSection({ featured, trending }) {
                   <div className={`${category.iconColor} mb-2 transition-transform group-hover:scale-110`}>
                     <Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="text-xs font-bold text-white uppercase tracking-wide line-clamp-1">
+                  <h3 className="text-xs font-bold text-foreground uppercase tracking-wide line-clamp-1">
                     {category.name}
                   </h3>
-                  <p className="mt-1 text-[11px] leading-snug text-white line-clamp-2">
+                  <p className="mt-1 text-[10px] leading-snug text-muted-foreground line-clamp-2">
                     {category.description}
                   </p>
                 </Link>
