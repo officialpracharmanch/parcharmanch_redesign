@@ -67,7 +67,7 @@ export function BlogDetailContent({ post }) {
 
 
       {/* BLOG CONTENT */}
-      <div className="space-y-6">
+      <div className="space-y-6 ">
 
         {single.Content?.map((section) => (
 
@@ -75,7 +75,7 @@ export function BlogDetailContent({ post }) {
 
             <div
               dangerouslySetInnerHTML={{ __html: section?.content }}
-              className="text-gray-800 leading-relaxed ql-editor quill-content"
+              className="text-gray-800 leading-relaxed ql-editor quill-content !p-0"
             />
 
             {section?.img?.url && (
