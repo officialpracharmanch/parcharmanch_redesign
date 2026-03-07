@@ -30,9 +30,9 @@ export default function HealthPage() {
   if (!currentCategory) return null;
 
   return (
-    <div className="w-full bg-accent-foreground mb-4">
+    <div className="w-full bg-accent-foreground mb-4 px-4 sm:px-6">
       <div className="sticky top-16 bg-accent-foreground border-b-4 border-gray-200 z-40">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 pt-6 pb-4">
+        <div className="max-w-7xl mx-auto pt-6 pb-4">
           <h1 className="text-3xl md:text-4xl font-bold mb-6 uppercase">
             {decodeSlug(category)}
           </h1>
@@ -56,15 +56,7 @@ export default function HealthPage() {
                 >
                   {sub.name}
 
-                  {/* ✅ LINE ALWAYS VISIBLE */}
-                  {/* <span
-                    className={`absolute left-0 -bottom-[2px] h-[2px] w-full transition-colors
-                      ${
-                        isActive
-                          ? "bg-blue-600"
-                          : "bg-gray-300"
-                      }`}
-                  /> */}
+                 
                 </Link>
               );
             })}

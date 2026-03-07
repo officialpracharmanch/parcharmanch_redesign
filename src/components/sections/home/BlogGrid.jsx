@@ -16,7 +16,7 @@ export default function BlogGrid() {
   
 
   return (
-    <section className="bg-accent-foreground px-4 py-10">
+    <section className="bg-accent-foreground px-4 sm:px-6 py-10">
       <div className="mx-auto max-w-7xl grid gap-10 lg:grid-cols-2">
        {randomLoading && (
           <>

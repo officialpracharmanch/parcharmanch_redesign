@@ -46,7 +46,7 @@ export function HeroSection({ featured, trending }) {
 
         {/* Categories Grid - Right 1/3 */}
         <div className="">
-          <div className="grid grid-cols-2 gap-3 p-4">
+          <div className="grid grid-cols-2 gap-3 py-4 pl-4 ">
             {[
               {
                 name: "Real Estate",

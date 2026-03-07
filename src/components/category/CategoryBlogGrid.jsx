@@ -24,8 +24,8 @@ export function CategoryBlogGrid() {
   if (!catBlogs.length) return <p className="text-center">No blogs found</p>
 
   return (
-    <section className="bg-accent-foreground py-14">
-          <div className="mx-auto max-w-7xl px-4 md:px-8">
+    <section className="bg-accent-foreground py-6 px-4 sm:px-6">
+          <div className="mx-auto max-w-7xl ">
             {/* Blogs Grid */}
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 space-y-6  items-start">
               {catBlogs.map((blog,i) => (

@@ -33,10 +33,10 @@ const benefits = [
 
 export function Footer() {
   return (
-    <footer className="bg-blue-accent py-1">
-      <div className="mx-auto max-w-7xl px-4 lg:px-6">
+    <footer className="bg-blue-accent py-8 px-4 lg:px-6">
+      <div className="mx-auto max-w-7xl ">
         {/* Main Footer Card */}
-        <div className=" p-8 lg:p-12">
+        {/* <div className=" p-8 lg:p-12 border-2 order-red-500"> */}
           <div className="grid gap-8 lg:grid-cols-6 ">
             {/* Left - Brand */}
             <div className="lg:col-span-2 ">
@@ -143,7 +143,7 @@ export function Footer() {
               </Link>
             </div>
           </div>
-        </div>
+        {/* </div> */}
 
         {/* Bottom Copyright */}
         <div className="mt-8 text-center">
