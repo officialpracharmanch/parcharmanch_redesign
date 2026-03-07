@@ -11,10 +11,10 @@ export default function BlogDetails({post}) {
     return (
     <div className="min-h-screen bg-accent-foreground">
       
-      <main className="mx-auto max-w-7xl px-4 py-8 lg:px-6 lg:py-12">
-        <div className="grid gap-8 ">
+      {/* <main className="mx-auto max-w-7xl px-4 py-8 lg:px-6 lg:py-12"> */}
+        {/* <div className="grid gap-8 "> */}
           {/* Main Content - 2 columns */}
-          <div className="">
+          <div className="px-4 sm:px-6">
             <BlogDetailContent post={post} />
           </div>
           
@@ -22,8 +22,8 @@ export default function BlogDetails({post}) {
           {/* <div className="lg:col-span-1">
             <LatestBlogsSidebar blogs={post?.latestBlogs?.slice(0, 6)} />
           </div> */}
-        </div>
-      </main>
+        {/* </div> */}
+      {/* </main> */}
 
     </div>
   )

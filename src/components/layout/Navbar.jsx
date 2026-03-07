@@ -15,9 +15,9 @@ export function Navbar() {
   const router = useRouter()
 
   return (
-    <header className="sticky top-0 z-50 bg-accent shadow-md">
+    <header className="sticky top-0 z-50 bg-accent shadow-md px-4 sm:px-6">
       {/* Main Nav */}
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-6">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between  py-3 ">
         <Link href="/" className="flex items-center gap-2.5">
           <span className="text-xl font-bold tracking-tight text-accent px-4 py-1 rounded-md bg-primary-foreground">
             PARCHAR <span className="text-yellow-500"> MANCH</span>

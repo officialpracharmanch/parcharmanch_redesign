@@ -9,7 +9,7 @@ export function BlogDetailContent({ post }) {
   const single = post?.blog;
 
   return (
-    <article className="max-w-6xl mx-auto px-4 space-y-10">
+    <article className="max-w-6xl mx-auto space-y-10">
 
       {/* HERO SECTION */}
       <div className="w-full flex justify-center py-6">
