@@ -14,7 +14,7 @@ export function BlogDetailContent({ post }) {
     <article className="max-w-6xl mx-auto space-y-10">
 
       {/* HERO SECTION */}
-      <div className="w-full flex justify-center py-6">
+      <div className="w-full flex justify-center pt-6">
 
         <div className="relative w-full md:h-[380px] md:flex">
 
@@ -69,7 +69,7 @@ export function BlogDetailContent({ post }) {
 
 
       {/* BLOG CONTENT */}
-      <div className="space-y-6 ">
+      <div className="space-y- ">
 
         {single.Content?.map((section) => (
 
