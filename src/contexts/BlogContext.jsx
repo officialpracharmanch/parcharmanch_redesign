@@ -10,8 +10,8 @@ export const BlogProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);     // 🔹 Dynamic Page
-  const [limit, setLimit] = useState(6);  
-  const [totalPages, setTotalPages] = useState(15);
+  const [limit, setLimit] = useState(15);  
+  const [totalPages, setTotalPages] = useState(1);
 
   const fetchBlogs = async () => {
   setLoading(true);
@@ -45,7 +45,7 @@ export const BlogProvider = ({ children }) => {
   const getBlogsByCategory = useCallback(
     (category) => {
       if (!category) return blogs
-   console.log("Filtering blogs for category:", category);
+  //  console.log("Filtering blogs for category:", category);
       return blogs.filter(
         (blog) =>
           blog.Category?.toLowerCase() === category.toLowerCase()
@@ -68,7 +68,7 @@ export const BlogProvider = ({ children }) => {
       try {
         catSetLoading(true);
         catSetError(null);
-         console.log("api call",category)
+        //  console.log("api call",category)
         const res = await axios.get(
           `https://parcharmanch-backend-7kc7.onrender.com/parcharmanch/getBlogsByCategory/${category}/${subCategory}?page=${catPage}&limit=15`
         );
@@ -76,7 +76,7 @@ export const BlogProvider = ({ children }) => {
         catSetBlogs((prev) =>
         catPage === 1 ? res.data.blogs : [...prev, ...res.data.blogs]
       );
-        console.log("data =>",res?.data);
+        // console.log("data =>",res?.data);
         setCatTotalPages(res?.data?.totalPages || 1);
         
       } catch (err) {
@@ -94,9 +94,39 @@ export const BlogProvider = ({ children }) => {
     fetchCatBlogs();
   }, [category, catPage, subCategory]); // 🔥 simple dependency
 // ******************************************************************
+
+const [randomBlogs, setRandomBlogs] = useState({});
+  const [randomLoading, setRandomLoading] = useState(true);
+  const [randomError, setRandomError] = useState(null);
+
+  const fetchRandomBlogs = async () => {
+    try {
+      setRandomLoading(true);
+      setRandomError(null);
+
+      const res = await axios.get(
+        `https://parcharmanch-backend-7kc7.onrender.com/parcharmanch/getRandomBlogsByCategory`
+      );
+
+      setRandomBlogs(res.data.data);
+    } catch (err) {
+      setRandomError(err.response?.data?.message || "Something went wrong");
+    } finally {
+      setRandomLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchRandomBlogs();
+  }, []);
+
+
+// ******************************************************************
+
+
   return (
     <BlogContext.Provider
-      value={{blogs,loading,error,page,setPage,totalPages,fetchBlogs,getBlogsByCategory,catBlogs,catLoading,catError,catPage,setCatPage,setCategory,setCatTotalPages,catTotalPages,setSubCategory
+      value={{blogs,loading,error,page,setPage,totalPages,fetchBlogs,getBlogsByCategory,catBlogs,catLoading,catError,catPage,setCatPage,setCategory,setCatTotalPages,catTotalPages,setSubCategory,randomBlogs,randomLoading,randomError
       }}
     >
       {children}

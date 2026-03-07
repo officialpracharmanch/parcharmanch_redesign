@@ -2,9 +2,10 @@
 
 import { useBlogs } from "@/contexts/BlogContext";
 import { CategoryBlogsSection } from "./CategoryBlogsSection";
+import { CategoryBlogSkeleton } from "@/components/skeletons/CategoryBlogSkeleton";
 
 export default function BlogGrid() {
-  const { blogs } = useBlogs();
+  const { blogs,randomBlogs,randomLoading,randomError } = useBlogs();
 
   const healthBlogs = blogs.filter(b => b.Category === "HEALTH");
   const politicsBlogs = blogs.filter(b => b.Category === "POLITICS");
@@ -17,35 +18,60 @@ export default function BlogGrid() {
   return (
     <section className="bg-accent-foreground px-4 py-10">
       <div className="mx-auto max-w-7xl grid gap-10 lg:grid-cols-2">
-        <CategoryBlogsSection
-          title="HEALTH"
-          blogs={healthBlogs}
-        />
+       {randomLoading && (
+          <>
+            <CategoryBlogSkeleton />
+            <CategoryBlogSkeleton />
+             <CategoryBlogSkeleton />
+            <CategoryBlogSkeleton /> 
+            <CategoryBlogSkeleton />
+            <CategoryBlogSkeleton /> 
+            <CategoryBlogSkeleton />
+            <CategoryBlogSkeleton />
+             <CategoryBlogSkeleton />
+            <CategoryBlogSkeleton />
+             <CategoryBlogSkeleton />
+            <CategoryBlogSkeleton />
+          </>
+        )}
+
+         {randomError && (
+          <p className="text-red-500">{randomError}</p>
+        )}
 
         <CategoryBlogsSection
+          title="HEALTH"
+         blogs={randomBlogs?.HEALTH || []}
+        />
+
+     {!randomLoading && !randomError && (
+      <>
+        {/* <CategoryBlogsSection
           title="REAL ESTATE"
           blogs={realEstateBlogs}
-        />
+        /> */}
 
          <CategoryBlogsSection
           title="FASHION & LIFESTYLE"
-          blogs={lifestyleBlogs}
+         blogs={randomBlogs?.["FASHION & LIFESTYLE"] || []}
         />
 
-         <CategoryBlogsSection
+         {/* <CategoryBlogsSection
           title="NEWS"
           blogs={newsBlogs}
-        />
+        /> */}
 
-        <CategoryBlogsSection
+        {/* <CategoryBlogsSection
           title="POLITICS"
           blogs={politicsBlogs}
-        />
+        /> */}
 
-        <CategoryBlogsSection
+        {/* <CategoryBlogsSection
           title="OTHER"
           blogs={otherBlogs}
-        />
+        /> */}
+        </>
+          )}
       </div>
     </section>
   );

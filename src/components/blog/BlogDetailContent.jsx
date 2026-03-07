@@ -2,179 +2,139 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Button } from "@/components/ui/button"
-import { Heart, Share2, BookmarkIcon } from "lucide-react"
-import { BlogPost } from "@/data/categories"
-
-
 
 export function BlogDetailContent({ post }) {
+
   const single = post?.blog;
-  // const initials = post.author
-  //   .split(" ")
-  //   .map(n => n[0])
-  //   .join("")
-  //   .toUpperCase()
 
   return (
-    <article className="space-y-6">
-      {/* Header Section */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-2">
-          <Link href={`/${single?.Category?.toLowerCase().replace(/\s+/g, "-")}`}>
-          <Badge variant="secondary">{single.Category}</Badge>
-          </Link>
-          {/* <span className="text-sm text-muted-foreground">•</span>
-          <span className="text-sm text-muted-foreground">{post.date}</span>
-          <span className="text-sm text-muted-foreground">•</span>
-          <span className="text-sm text-muted-foreground">{post.readTime} read</span> */}
-        </div>
+    <article className="max-w-6xl mx-auto px-4 space-y-10">
 
-        <h1 className="font-playfair text-4xl font-bold leading-tight text-balance md:text-5xl">
-          {single.Title}
-        </h1>
+      {/* HERO SECTION */}
+      <div className="w-full flex justify-center py-6">
 
-        {/* <p className="text-lg text-muted-foreground text-balance">
-          {post.description}
-        </p> */}
-      </div>
+        <div className="relative w-full md:h-[380px] md:flex">
 
-      {/* Author Section */}
-      {/* <div className="flex items-center justify-between rounded-lg bg-card p-4">
-        <div className="flex items-center gap-3">
-          <Avatar className="h-12 w-12">
-            <AvatarImage 
-              src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${post.author}`}
-              alt={post.author}
+          {/* IMAGE */}
+          <div className="w-full md:w-[70%] h-[260px] md:h-[380px] flex items-center justify-center bg-black md:rounded-tl-lg md:rounded-bl-lg overflow-hidden">
+
+            <Image
+              src={single?.HeroImg?.url}
+              alt={single?.HeroAltText || "Blog Image"}
+              width={1200}
+              height={800}
+              priority
+              className="w-full h-full object-fit"
             />
-            <AvatarFallback>{initials}</AvatarFallback>
-          </Avatar>
-          <div>
-            <p className="font-semibold text-sm">{post.author}</p>
-            <p className="text-xs text-muted-foreground">Published on {post.date}</p>
+
           </div>
-        </div>
-        <Button variant="outline" size="sm">Follow</Button>
-      </div> */}
 
-      {/* Featured Image */}
-      <div className="relative aspect-video overflow-hidden rounded-lg">
-        <Image
-          src={single.HeroImg.url}
-          alt={single?.HeroAltText || "Digital Marketing Company In India"}
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
 
-      {/* Content */}
-      {/* <div className="prose prose-sm dark:prose-invert max-w-none">
-        <h2>Introduction</h2>
-        <p>
-          {post.description} This comprehensive guide will walk you through everything you need to know about this topic, providing practical insights and actionable strategies.
-        </p>
+          {/* RIGHT BEIGE BLOCK */}
+          <div className="hidden md:block md:w-[30%] bg-[#caa58f] rounded-r-lg"></div>
 
-        <h2>Key Takeaways</h2>
-        <ul>
-          <li>Understanding the fundamentals and core concepts</li>
-          <li>Practical implementation strategies and best practices</li>
-          <li>Real-world examples and case studies</li>
-          <li>Future trends and what's coming next</li>
-          <li>Resources for continued learning</li>
-        </ul>
 
-        <h2>Deep Dive into the Topic</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-        </p>
-        <p>
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+          {/* TITLE CARD */}
+          <div
+            className="
+            relative
+            md:absolute md:right-[40px] md:top-1/2 md:-translate-y-1/2
+            bg-white md:bg-[#1b1c1e]
+            p-6
+            w-full md:max-w-[340px]
+            border-r-4 border-b-4 border-red-500
+            shadow-xl
+            "
+          >
 
-        <h2>Best Practices</h2>
-        <p>
-          When approaching this topic, consider these important practices that will help you achieve optimal results and avoid common pitfalls.
-        </p>
-        <ul>
-          <li>Start with a clear understanding of your goals</li>
-          <li>Document your process and learnings</li>
-          <li>Iterate based on feedback and results</li>
-          <li>Stay updated with the latest developments</li>
-        </ul>
-
-        <h2>Conclusion</h2>
-        <p>
-          This topic continues to evolve rapidly. By staying informed and applying these principles, you'll be well-positioned to succeed. Keep learning, experimenting, and sharing your knowledge with others.
-        </p>
-      </div> */}
-        <div className="">
-            {/* Blog Content */}
-            {single.Content?.map((section) => (
-              <div key={section?._id} className="">
-                <div
-                  dangerouslySetInnerHTML={{ __html: section?.content }}
-                  className="text-gray-800 leading-relaxed ql-editor quill-content "
-                />
-                {section?.img?.url && (
-                  <img
-                    src={section.img.url}
-                    alt={section?.img?.altText || "Digital Marketing Company In India"}
-                    className="rounded-lg mt-2 mb-4 w-full max-h-90"
-                  />
-                )}
-              </div>
-            ))}
-            {single?.FAQs?.length > 0 && (
-              <div className="mt-10">
-                <h2 className="text-2xl font-semibold mb-4 text-gray-900">
-                  FAQs
-                </h2>
-                {single.FAQs.map((faq, i) => (
-                  <details
-                    key={i}
-                    className="border-b border-gray-200 py-3 cursor-pointer group"
-                  >
-                    <summary className="font-semibold text-gray-800">
-                      {faq.Q}
-                    </summary>
-                    <p className="mt-2 text-gray-600">{faq.A}</p>
-                  </details>
-                ))}
-              </div>
-            )}
+            <div className="mb-2">
+              <Link href={`/${single?.Category?.toLowerCase().replace(/\s+/g, "-")}`}>
+                <Badge variant="secondary">{single?.Category}</Badge>
+              </Link>
             </div>
 
+            <h1 className="text-lg md:text-xl font-semibold leading-snug text-[#0f172a] md:text-white">
+              {single?.Title}
+            </h1>
 
-      {/* Action Buttons */}
-      {/* <div className="flex flex-wrap gap-3 pt-6 border-t">
-        <Button variant="outline" size="sm" className="gap-2">
-          <Heart className="h-4 w-4" />
-          Helpful
-        </Button>
-        <Button variant="outline" size="sm" className="gap-2">
-          <BookmarkIcon className="h-4 w-4" />
-          Save
-        </Button>
-        <Button variant="outline" size="sm" className="gap-2">
-          <Share2 className="h-4 w-4" />
-          Share
-        </Button>
-      </div> */}
+          </div>
 
-      {/* Related Tags */}
-      {/* <div className="space-y-3 pt-4">
-        <h3 className="font-semibold text-sm">Tags</h3>
-        <div className="flex flex-wrap gap-2">
-          <Badge variant="secondary">{post.subcategory}</Badge>
-          <Badge variant="secondary">{post.category}</Badge>
-          <Badge variant="secondary">Tutorial</Badge>
-          <Badge variant="secondary">Guide</Badge>
         </div>
-      </div> */}
+
+      </div>
+
+
+
+      {/* BLOG CONTENT */}
+      <div className="space-y-6">
+
+        {single.Content?.map((section) => (
+
+          <div key={section?._id}>
+
+            <div
+              dangerouslySetInnerHTML={{ __html: section?.content }}
+              className="text-gray-800 leading-relaxed ql-editor quill-content"
+            />
+
+            {section?.img?.url && (
+
+              <div className="w-full my-6 ">
+
+  <Image
+    src={section.img.url}
+    alt={section?.img?.altText || "Blog Image"}
+    width={900}
+    height={600}
+    sizes="(max-width: 768px) 100vw, 700px"
+    className="max-w-175 w-full h-auto rounded-lg object-contain"
+  />
+
+</div>
+
+            )}
+
+          </div>
+
+        ))}
+
+
+
+        {/* FAQs */}
+        {single?.FAQs?.length > 0 && (
+
+          <div className="mt-10">
+
+            <h2 className="text-2xl font-semibold mb-4 text-gray-900">
+              FAQs
+            </h2>
+
+            {single.FAQs.map((faq, i) => (
+
+              <details
+                key={i}
+                className="border-b border-gray-200 py-3 cursor-pointer group"
+              >
+
+                <summary className="font-semibold text-gray-800">
+                  {faq.Q}
+                </summary>
+
+                <p className="mt-2 text-gray-600">
+                  {faq.A}
+                </p>
+
+              </details>
+
+            ))}
+
+          </div>
+
+        )}
+
+      </div>
+
     </article>
   )
 }

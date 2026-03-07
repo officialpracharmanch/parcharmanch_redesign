@@ -12,16 +12,16 @@ export default function BlogDetails({post}) {
     <div className="min-h-screen bg-accent-foreground">
       
       <main className="mx-auto max-w-7xl px-4 py-8 lg:px-6 lg:py-12">
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-8 ">
           {/* Main Content - 2 columns */}
-          <div className="lg:col-span-2">
+          <div className="">
             <BlogDetailContent post={post} />
           </div>
           
           {/* Sidebar - 1 column */}
-          <div className="lg:col-span-1">
+          {/* <div className="lg:col-span-1">
             <LatestBlogsSidebar blogs={post?.latestBlogs?.slice(0, 6)} />
-          </div>
+          </div> */}
         </div>
       </main>
 

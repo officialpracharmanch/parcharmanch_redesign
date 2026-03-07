@@ -31,14 +31,14 @@ export default function HealthPage() {
 
   return (
     <div className="w-full bg-accent-foreground mb-4">
-      <div className="sticky top-16 bg-accent-foreground border-b border-gray-200 z-40">
+      <div className="sticky top-16 bg-accent-foreground border-b-4 border-gray-200 z-40">
         <div className="max-w-7xl mx-auto px-4 md:px-6 pt-6 pb-4">
           <h1 className="text-3xl md:text-4xl font-bold mb-6 uppercase">
             {decodeSlug(category)}
           </h1>
 
           {/* SUBCATEGORY BAR */}
-          <div className="flex gap-6 pb-3 overflow-x-auto removeScrollbar">
+          <div className="flex gap-6 overflow-x-auto removeScrollbar">
             {subcategories.map((sub) => {
               const subSlug = createSlug(sub.name);
               const isActive = subSlug === activeSubcat;

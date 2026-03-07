@@ -31,7 +31,7 @@ export function CategoryBlogGrid() {
               {catBlogs.map((blog,i) => (
                 <Link
                   key={i}
-                  href={`/blog/${blog.slug}`}
+                  href={`/blog/${blog.Slug}`}
                   className="group rounded-tl-2xl rounded-tr-2xl overflow-hidden bg-white border hover:shadow-lg transition group"
                 >
                   {/* Image */}
