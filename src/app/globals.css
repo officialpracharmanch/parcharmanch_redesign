@@ -123,6 +123,11 @@
   display: none; /* Chrome, Safari and Opera */
 }
 
+.quill-content .ql-editor ul,
+.quill-content .ql-editor ol {
+  margin-left: -20px !important; /* Adjust this value as needed */
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

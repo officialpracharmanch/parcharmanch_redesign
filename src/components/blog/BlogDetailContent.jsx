@@ -2,7 +2,9 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "@/components/ui/badge";
+import "@/app/globals.css";
+
 
 export function BlogDetailContent({ post }) {
 
@@ -73,10 +75,12 @@ export function BlogDetailContent({ post }) {
 
           <div key={section?._id}>
 
-            <div
+            <div className="quill-content">
+           <div
+                className="ql-editor !p-0 text-gray-800 leading-relaxed"
               dangerouslySetInnerHTML={{ __html: section?.content }}
-              className="text-gray-800 leading-relaxed ql-editor quill-content !p-0"
             />
+            </div>
 
             {section?.img?.url && (
 
